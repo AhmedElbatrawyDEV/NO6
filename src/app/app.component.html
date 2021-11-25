@@ -31,12 +31,10 @@
   <input type="text" formControlName="Age" />
   <span *ngIf="Age?.invalid && Age?.touched && Age?.dirty">age invalid</span>
   <br />
-  <label for="FavoriteColor">Password</label>
-  <input type="text" formControlName="Password" />
-  <br />
-  <label for="FavoriteColor">ConfirmPassword</label>
-  <input type="text" formControlName="ConfirmPassword" />
-  <span *ngIf="Email?.errors?.NotSame">invalid same password</span>
+  <label for="FavoriteColor">password</label>
+  <input type="text" formControlName="password" />
+  <label for="FavoriteColor">confirmPassword</label>
+  <input type="text" formControlName="confirmPassword" />
   <div formGroupName="Address">
     <label for="City">City</label>
     <input type="text" formControlName="City" /> <br />
@@ -44,5 +42,23 @@
     <input type="text" formControlName="Street" /><br />
   </div>
   <button type="submit">Submit</button>
+  {{signUp.errors | json}}
   <!-- <button type="button" (click)="doReset()">Reset</button> -->
+</form>
+
+<br>
+
+<form [formGroup]="myform" (ngSubmit)="doSubmit()">
+
+  <label for="FavoriteColor">Password</label>
+  <input type="text" formControlName="Password" />
+  <label for="FavoriteColor">confirmPassword</label>
+  <input type="text" formControlName="confirmPassword" />
+
+  <div class="form-group">
+    <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+      Reset
+    </button>
+  </div>
+  {{myform.errors | json}}
 </form>
