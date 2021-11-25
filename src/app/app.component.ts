@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { validateEmail } from './ValidateEmail';
 import { validateName } from './validateName';
 
 @Component({
@@ -37,7 +38,10 @@ export class AppComponent {
   constructor(private fb: FormBuilder) {
     this.signUp = fb.group({
       Name: ['', [Validators.required, Validators.minLength(3), validateName]],
-      Email: ['', [Validators.email, Validators.pattern(/.*com$/)]],
+      Email: [
+        '',
+        [Validators.email, Validators.required, validateEmail(/.*com$/)],
+      ],
       Age: ['', Validators.pattern(/[0-9]/)],
       Password: '',
       Address: fb.group({

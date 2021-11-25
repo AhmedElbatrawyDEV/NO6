@@ -21,7 +21,12 @@
 
   <br />
   <label for="text">Email</label>
-  <input type="text" formControlName="Email" /><br />
+  <input type="text" formControlName="Email" />
+  <ng-container *ngIf="Email?.invalid && Email?.touched && Email?.dirty">
+    <span *ngIf="Email?.errors?.invalidEmail">invalid email</span>
+    <span *ngIf="Email?.errors?.required">NameRequired</span>
+  </ng-container>
+  <br />
   <label for="text">Age</label>
   <input type="text" formControlName="Age" />
   <span *ngIf="Age?.invalid && Age?.touched && Age?.dirty">age invalid</span>
