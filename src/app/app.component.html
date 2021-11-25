@@ -33,6 +33,10 @@
   <br />
   <label for="FavoriteColor">Password</label>
   <input type="text" formControlName="Password" />
+  <br />
+  <label for="FavoriteColor">ConfirmPassword</label>
+  <input type="text" formControlName="ConfirmPassword" />
+  <span *ngIf="Email?.errors?.NotSame">invalid same password</span>
   <div formGroupName="Address">
     <label for="City">City</label>
     <input type="text" formControlName="City" /> <br />

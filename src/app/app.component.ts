@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { validateEmail } from './ValidateEmail';
 import { validateName } from './validateName';
+import { validatePassword } from './ValidatePassword';
 
 @Component({
   selector: 'app-root',
@@ -36,19 +37,26 @@ export class AppComponent {
   // });
   signUp!: FormGroup;
   constructor(private fb: FormBuilder) {
-    this.signUp = fb.group({
-      Name: ['', [Validators.required, Validators.minLength(3), validateName]],
-      Email: [
-        '',
-        [Validators.email, Validators.required, validateEmail(/.*com$/)],
-      ],
-      Age: ['', Validators.pattern(/[0-9]/)],
-      Password: '',
-      Address: fb.group({
-        City: '',
-        Street: '',
-      }),
-    });
+    this.signUp = fb.group(
+      {
+        Name: [
+          '',
+          [Validators.required, Validators.minLength(3), validateName],
+        ],
+        Email: [
+          '',
+          [Validators.email, Validators.required, validateEmail(/.*com$/)],
+        ],
+        Age: ['', Validators.pattern(/[0-9]/)],
+        Password: '',
+        ConfirmPassword: [''],
+        Address: fb.group({
+          City: '',
+          Street: '',
+        }),
+      },
+      validatePassword('Password', 'ConfirmPassword')
+    );
     this.signUp.valueChanges.subscribe((changes) => {
       if (isNaN(changes.Age)) {
         this.signUp.patchValue({
